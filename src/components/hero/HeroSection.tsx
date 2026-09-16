@@ -34,13 +34,13 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen pt-28 pb-16 lg:pt-36 lg:pb-24 flex flex-col justify-center items-center overflow-hidden bg-grid-pattern text-left"
+      className="relative min-h-screen pt-28 pb-16 lg:pt-36 lg:pb-24 flex flex-col justify-center items-center overflow-hidden bg-grid-pattern text-center"
     >
       {/* Ambient background glows */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-[#ff5500]/10 rounded-full blur-[170px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-        <div className="flex flex-col items-start max-w-4xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center z-10">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Eyebrow Pill */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -57,13 +57,13 @@ export const HeroSection: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-neutral-900 leading-[1.06] mb-6 max-w-3xl"
+            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-neutral-900 leading-[1.06] mb-6 max-w-4xl text-center"
           >
             {words.map((word, i) => (
               <motion.span
                 key={i}
                 variants={wordVariants}
-                className={`inline-block mr-3 ${
+                className={`inline-block mx-1.5 ${
                   word.toLowerCase() === "intelligent" || word.toLowerCase() === "systems."
                     ? "text-orange-gradient"
                     : ""
@@ -79,7 +79,7 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-base sm:text-lg lg:text-xl text-neutral-600 leading-relaxed max-w-2xl mb-8 font-normal"
+            className="text-base sm:text-lg lg:text-xl text-neutral-600 leading-relaxed max-w-2xl mb-8 font-normal text-center mx-auto"
           >
             {PORTFOLIO_DATA.personal.bio}
           </motion.p>
@@ -89,7 +89,7 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-wrap items-center gap-2 mb-8 text-xs font-mono"
+            className="flex flex-wrap items-center justify-center gap-2 mb-8 text-xs font-mono"
           >
             {[
               { label: "AGENTIC AI", icon: Bot },
@@ -116,7 +116,7 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap items-center gap-4 mb-8 w-full sm:w-auto"
+            className="flex flex-wrap items-center justify-center gap-4 mb-8 w-full sm:w-auto"
           >
             <MagneticButton
               href="#projects"
@@ -145,7 +145,7 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="flex flex-wrap items-center gap-3"
+            className="flex flex-wrap items-center justify-center gap-3"
           >
             <a
               href={PORTFOLIO_DATA.personal.github}
