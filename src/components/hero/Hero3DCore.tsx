@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { AIIntelligenceCore } from "./ai-core/AIIntelligenceCore";
+import { Hero3DScene } from "./Hero3DScene";
 
 export const Hero3DCore: React.FC = () => {
-  return <AIIntelligenceCore />;
+  return <Hero3DScene />;
 };
 
 export default Hero3DCore;

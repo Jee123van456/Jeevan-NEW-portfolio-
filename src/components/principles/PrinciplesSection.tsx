@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { PORTFOLIO_DATA } from "@/data/portfolioData";
+import { Principles3D } from "./Principles3D";
 
 export const PrinciplesSection: React.FC = () => {
   const statements = [
@@ -40,10 +40,15 @@ export const PrinciplesSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-16"
+          className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-12"
         >
           "I don't just build demos."
         </motion.h2>
+
+        {/* 3D SPATIAL TYPOGRAPHY EXPERIENCE */}
+        <div className="mb-14">
+          <Principles3D />
+        </div>
 
         {/* Grid of Big Animated Statements */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">

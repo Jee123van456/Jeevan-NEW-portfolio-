@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { CheckCircle, ArrowRight, ShieldCheck, Cpu, Code2, Database, Network, LineChart, Server } from "lucide-react";
+import { ArrowRight, ShieldCheck, Cpu, Code2, Database, Network, LineChart, Server } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { PORTFOLIO_DATA } from "@/data/portfolioData";
+import { EngineeringArchitecture3D } from "./EngineeringArchitecture3D";
 
 const STEP_ICONS = [
   Code2,
@@ -33,12 +33,17 @@ export const ArchitectureSection: React.FC = () => {
         <SectionHeading
           eyebrow="ENGINEERING LIFECYCLE"
           title="From Idea → Intelligence → Production"
-          subtitle="Beyond standard API calls. A comprehensive systems-engineering lifecycle for reliable, scalable, and benchmarked AI applications."
+          subtitle="Beyond standard API calls. A continuous 3D systems-engineering lifecycle for reliable, scalable, and benchmarked AI applications."
           dark={true}
         />
 
-        {/* Horizontal & Vertical Pipeline Nodes */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        {/* 3D SYSTEM ARCHITECTURE FLOW */}
+        <div className="my-12">
+          <EngineeringArchitecture3D />
+        </div>
+
+        {/* Pipeline Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {steps.map((item, idx) => {
             const Icon = STEP_ICONS[idx % STEP_ICONS.length];
             const isActive = activeStep === idx;

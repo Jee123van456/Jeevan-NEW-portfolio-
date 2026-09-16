@@ -6,6 +6,7 @@ import { Mail, Copy, Check, ArrowRight, Sparkles } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { PORTFOLIO_DATA } from "@/data/portfolioData";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { ContactPortal3D } from "./ContactPortal3D";
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -18,7 +19,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section id="contact" className="py-28 lg:py-40 bg-[#0b0c0e] text-white relative overflow-hidden">
-      {/* Animated glowing 3D orange orb behind content */}
+      {/* Animated glowing 3D orange background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ff5500]/15 rounded-full blur-[180px] pointer-events-none animate-pulse" />
       <div className="absolute inset-0 bg-grid-pattern-dark opacity-30 pointer-events-none" />
 
@@ -51,10 +52,15 @@ export const ContactSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg sm:text-2xl text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed mb-12"
+          className="text-lg sm:text-2xl text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed mb-10"
         >
-          Let's build something intelligent.
+          LET'S BUILD SOMETHING INTELLIGENT.
         </motion.p>
+
+        {/* 3D SPATIAL ARCHITECTURAL PORTAL */}
+        <div className="mb-14">
+          <ContactPortal3D />
+        </div>
 
         {/* Contact Info Cards */}
         <motion.div

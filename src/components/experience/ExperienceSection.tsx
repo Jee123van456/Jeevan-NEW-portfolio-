@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Calendar, Briefcase, GraduationCap, Trophy, CheckCircle2 } from "lucide-react";
+import { Briefcase, GraduationCap, Trophy } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { PORTFOLIO_DATA } from "@/data/portfolioData";
+import { ExperienceSpatial3D } from "./ExperienceSpatial3D";
 
 export const ExperienceSection: React.FC = () => {
   const events = PORTFOLIO_DATA.experienceTimeline;
@@ -19,9 +19,14 @@ export const ExperienceSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           eyebrow="MILESTONES & JOURNEY"
-          title="Experience & Education"
+          title="Experience & Education in 3D"
           subtitle="A track record of systems engineering, academic excellence, hackathon challenges, and AI application development."
         />
+
+        {/* 3D SPATIAL TIMELINE VIEW */}
+        <div className="my-12">
+          <ExperienceSpatial3D />
+        </div>
 
         <div className="max-w-4xl mx-auto mt-12 relative">
           {/* Vertical Timeline Bar */}

@@ -2,36 +2,16 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Layers, Cpu, Activity, Play, Network, Database, Terminal } from "lucide-react";
+import { ArrowRight, Activity, Database, Network } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Reveal } from "@/components/ui/Reveal";
 import { PORTFOLIO_DATA, Project } from "@/data/portfolioData";
 import { ProjectDetailModal } from "./ProjectDetailModal";
+import { Project3DVisualizer } from "./Project3DVisualizer";
 
-// Waveform Animation for Voice Agent
-const AudioWaveform = () => {
-  return (
-    <div className="flex items-end gap-1.5 h-12 my-4 px-4 py-2 rounded-xl bg-black/40 border border-white/10">
-      {[40, 75, 30, 90, 60, 100, 45, 80, 50, 95, 35, 70, 85, 40, 60].map((height, i) => (
-        <motion.div
-          key={i}
-          animate={{ height: ["20%", `${height}%`, "20%"] }}
-          transition={{
-            duration: 1.2,
-            repeat: Infinity,
-            delay: i * 0.08,
-            ease: "easeInOut",
-          }}
-          className="w-1.5 bg-gradient-to-t from-[#ff5500] to-[#ff8800] rounded-full"
-        />
-      ))}
-    </div>
-  );
-};
-
-// Evaluation Bar Component for Evals & Hardness project
+// Evaluation Bar Component
 const EvalMetricBar = ({ label, value, score }: { label: string; value: string; score: number }) => {
   return (
     <div className="flex flex-col gap-1.5">
@@ -67,8 +47,8 @@ export const ProjectsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           eyebrow="PORTFOLIO OF SYSTEMS"
-          title="Selected Systems"
-          subtitle="Production-grade AI architectures, autonomous agents, and RAG knowledge engines engineered for high reliability."
+          title="Selected Systems in 3D"
+          subtitle="Production-grade AI architectures, autonomous agents, and RAG knowledge engines engineered inside spatial 3D environments."
           dark={true}
         />
 
@@ -113,42 +93,36 @@ export const ProjectsSection: React.FC = () => {
                     </MagneticButton>
                   </div>
 
-                  {/* Interactive Architecture Visualization Node Flow */}
-                  <div className="lg:col-span-6 p-6 rounded-2xl bg-black/60 border border-white/10 shadow-inner">
-                    <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
-                      <div className="flex items-center gap-2 text-xs font-mono text-[#ff5500]">
-                        <Database className="w-4 h-4 animate-pulse" />
-                        <span>INTERACTIVE ARCHITECTURE GRAPH</span>
+                  {/* 3D Visualizer & Interactive Architecture Nodes */}
+                  <div className="lg:col-span-6 flex flex-col gap-4">
+                    <Project3DVisualizer projectId={projects[0].id} />
+                    
+                    <div className="p-5 rounded-2xl bg-black/60 border border-white/10 shadow-inner">
+                      <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2">
+                        <div className="flex items-center gap-2 text-xs font-mono text-[#ff5500]">
+                          <Database className="w-4 h-4 animate-pulse" />
+                          <span>9-STAGE RETRIEVAL FLOW</span>
+                        </div>
+                        <span className="text-[10px] font-mono text-neutral-500">REALTIME SIGNAL</span>
                       </div>
-                      <span className="text-[10px] font-mono text-neutral-500">HOVER NODES</span>
-                    </div>
 
-                    {/* Nodes Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                      {projects[0].architectureNodes.map((node) => (
-                        <motion.div
-                          key={node.id}
-                          onMouseEnter={() => setActiveHoverNode(node.id)}
-                          onMouseLeave={() => setActiveHoverNode(null)}
-                          whileHover={{ scale: 1.04 }}
-                          className={`p-3 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
-                            activeHoverNode === node.id
-                              ? "bg-[#ff5500] text-white border-[#ff5500] shadow-[0_0_20px_rgba(255,85,0,0.5)]"
-                              : "bg-white/5 text-neutral-300 border-white/10 hover:border-white/20"
-                          }`}
-                        >
-                          <span className="text-xs font-bold">{node.label}</span>
-                          {node.sub && (
-                            <span
-                              className={`text-[10px] font-mono mt-1 ${
-                                activeHoverNode === node.id ? "text-white/90" : "text-[#ff5500]"
-                              }`}
-                            >
-                              {node.sub}
-                            </span>
-                          )}
-                        </motion.div>
-                      ))}
+                      <div className="grid grid-cols-3 gap-2">
+                        {projects[0].architectureNodes.map((node) => (
+                          <motion.div
+                            key={node.id}
+                            onMouseEnter={() => setActiveHoverNode(node.id)}
+                            onMouseLeave={() => setActiveHoverNode(null)}
+                            whileHover={{ scale: 1.04 }}
+                            className={`p-2.5 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
+                              activeHoverNode === node.id
+                                ? "bg-[#ff5500] text-white border-[#ff5500] shadow-[0_0_15px_rgba(255,85,0,0.5)]"
+                                : "bg-white/5 text-neutral-300 border-white/10"
+                            }`}
+                          >
+                            <span className="text-[11px] font-bold">{node.label}</span>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -177,21 +151,19 @@ export const ProjectsSection: React.FC = () => {
                       {projects[1].description}
                     </p>
 
-                    {/* Animated Agent Graph Nodes */}
-                    <div className="p-5 rounded-2xl bg-black/60 border border-white/10 mb-6">
-                      <span className="text-[10px] font-mono text-neutral-400 block mb-3">
-                        COORDINATED AGENT NETWORK
+                    <Project3DVisualizer projectId={projects[1].id} />
+
+                    <div className="p-4 rounded-2xl bg-black/60 border border-white/10 my-6">
+                      <span className="text-[10px] font-mono text-neutral-400 block mb-2">
+                        AUTONOMOUS AGENT NODES
                       </span>
-                      <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-1.5">
                         {["Planner", "Researcher", "Coder", "Reviewer", "Executor"].map((agent, i) => (
                           <React.Fragment key={agent}>
-                            <motion.div
-                              whileHover={{ scale: 1.08 }}
-                              className="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-[#ff5500]/15 text-[#ff7722] border border-[#ff5500]/30 shadow-xs cursor-pointer"
-                            >
+                            <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-[#ff5500]/15 text-[#ff7722] border border-[#ff5500]/30">
                               {agent}
-                            </motion.div>
-                            {i < 4 && <Network className="w-3.5 h-3.5 text-neutral-600 shrink-0 animate-pulse" />}
+                            </span>
+                            {i < 4 && <Network className="w-3 h-3 text-neutral-600 shrink-0" />}
                           </React.Fragment>
                         ))}
                       </div>
@@ -226,10 +198,9 @@ export const ProjectsSection: React.FC = () => {
                       {projects[2].description}
                     </p>
 
-                    {/* Audio Waveform Visualization */}
-                    <AudioWaveform />
+                    <Project3DVisualizer projectId={projects[2].id} />
 
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-2 my-6">
                       {projects[2].technologies.slice(0, 5).map((t) => (
                         <span key={t} className="px-2 py-0.5 rounded text-[11px] font-mono bg-white/5 text-neutral-400 border border-white/10">
                           {t}
@@ -279,20 +250,23 @@ export const ProjectsSection: React.FC = () => {
                     </MagneticButton>
                   </div>
 
-                  {/* Animated Metric Bars Dashboard */}
-                  <div className="lg:col-span-6 p-6 rounded-2xl bg-black/60 border border-white/10 flex flex-col gap-4">
-                    <div className="flex items-center justify-between text-xs font-mono text-neutral-400 border-b border-white/10 pb-3">
-                      <span className="flex items-center gap-2 text-[#ff5500]">
-                        <Activity className="w-4 h-4 animate-pulse" />
-                        LIVE EVALUATION METRICS
-                      </span>
-                      <span>BENCHMARK SCORE</span>
-                    </div>
+                  {/* 3D Visualizer & Live Evaluation Dashboard */}
+                  <div className="lg:col-span-6 flex flex-col gap-4">
+                    <Project3DVisualizer projectId={projects[3].id} />
+                    
+                    <div className="p-5 rounded-2xl bg-black/60 border border-white/10 flex flex-col gap-3">
+                      <div className="flex items-center justify-between text-xs font-mono text-neutral-400 border-b border-white/10 pb-2">
+                        <span className="flex items-center gap-2 text-[#ff5500]">
+                          <Activity className="w-4 h-4 animate-pulse" />
+                          LIVE EVALUATION METRICS
+                        </span>
+                        <span>SCORE</span>
+                      </div>
 
-                    <EvalMetricBar label="Faithfulness Score" value="0.94" score={94} />
-                    <EvalMetricBar label="Retrieval Quality" value="91.2%" score={91.2} />
-                    <EvalMetricBar label="Tool Execution Success" value="98.5%" score={98.5} />
-                    <EvalMetricBar label="Agent Latency p95" value="320ms" score={85} />
+                      <EvalMetricBar label="Faithfulness Score" value="0.94" score={94} />
+                      <EvalMetricBar label="Retrieval Quality" value="91.2%" score={91.2} />
+                      <EvalMetricBar label="Tool Execution Success" value="98.5%" score={98.5} />
+                    </div>
                   </div>
 
                 </div>

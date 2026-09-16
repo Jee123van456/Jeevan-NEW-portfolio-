@@ -2,10 +2,11 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, Briefcase, Cpu, Code2, Network, ArrowRight } from "lucide-react";
+import { GraduationCap, Briefcase, Cpu } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Reveal } from "@/components/ui/Reveal";
+import { AboutSpatialTimeline } from "./AboutSpatialTimeline";
 
 export const AboutSection: React.FC = () => {
   const milestones = [
@@ -56,7 +57,22 @@ export const AboutSection: React.FC = () => {
           subtitle="A Computer Science graduate and MBA student specializing in Information Technology & Business Analytics, building intelligent applications with modern AI and software engineering technologies."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mt-12">
+        {/* 3D Spatial Timeline Feature */}
+        <div className="mt-12 mb-14">
+          <Reveal delay={0.1}>
+            <div className="mb-4">
+              <span className="text-xs font-mono font-semibold text-[#ff5500] tracking-widest uppercase">
+                3D SPATIAL JOURNEY
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mt-1">
+                Evolution & Milestones in 3D Space
+              </h3>
+            </div>
+            <AboutSpatialTimeline />
+          </Reveal>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Storytelling & Focus Pills */}
           <div className="lg:col-span-6 flex flex-col gap-6">
@@ -78,7 +94,7 @@ export const AboutSection: React.FC = () => {
                   CORE TECHNICAL SPECTRUM
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {focusPills.map((pill, idx) => (
+                  {focusPills.map((pill) => (
                     <motion.span
                       key={pill}
                       whileHover={{ scale: 1.05, y: -2 }}
@@ -92,7 +108,7 @@ export const AboutSection: React.FC = () => {
             </Reveal>
           </div>
 
-          {/* Right Column: Visual Storytelling Interactive Timeline Cards */}
+          {/* Right Column: Visual Storytelling Cards */}
           <div className="lg:col-span-6 relative">
             <div className="flex flex-col gap-6 relative">
               {/* Connecting line */}

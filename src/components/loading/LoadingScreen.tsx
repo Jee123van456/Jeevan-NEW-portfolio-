@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const LoadingScreen: React.FC<{ onComplete?: () => void }> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [isDone, setIsDone] = useState(false);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -14,24 +19,28 @@ export const LoadingScreen: React.FC<{ onComplete?: () => void }> = ({ onComplet
           clearInterval(timer);
           setTimeout(() => {
             setIsDone(true);
-            if (onComplete) onComplete();
-          }, 300);
+            if (onCompleteRef.current) onCompleteRef.current();
+          }, 200);
           return 100;
         }
-        return prev + Math.floor(Math.random() * 15) + 10;
+        return prev + 25;
       });
-    }, 80);
+    }, 50);
 
     return () => clearInterval(timer);
-  }, [onComplete]);
+  }, []);
+
+  if (isDone) return null;
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {!isDone && (
         <motion.div
           key="loader"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6, ease: "easeInOut" } }}
+          animate={{ opacity: progress >= 100 ? 0 : 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } }}
+          style={{ pointerEvents: progress >= 100 ? "none" : "auto" }}
           className="fixed inset-0 z-[10000] bg-[#0b0c0e] text-white flex flex-col items-center justify-center p-6 select-none"
         >
           {/* Subtle glowing ambient orb behind */}
@@ -85,3 +94,4 @@ export const LoadingScreen: React.FC<{ onComplete?: () => void }> = ({ onComplet
     </AnimatePresence>
   );
 };
+
